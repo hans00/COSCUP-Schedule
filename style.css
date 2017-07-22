@@ -1,0 +1,51 @@
+.days a {
+	margin: 0 .5em;
+}
+
+.timeline :first-child {
+	width: 8em;
+}
+
+.timeline * {
+	text-align: center;
+	vertical-align: middle;
+	margin: auto;
+}
+
+.room-events {
+	position: relative;
+}
+
+.timeline tbody td,
+.timeline tbody th {
+	position: relative;
+	top: 1em;
+}
+
+.timeline tbody th .time {
+	margin-bottom: 280px;
+	transform: translate(0, -50%);
+}
+
+.event {
+	position: absolute;
+	overflow: hidden;
+	width: 100% !important;
+	min-width: 100% !important;
+	display: block;
+	vertical-align: middle;
+	margin: auto;
+}
+
+.event > span {
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	margin-top: auto;
+	margin-bottom: 0.2em;
+}
+
+.event > span:nth-child(2) {
+	font-weight: 900;
+}
