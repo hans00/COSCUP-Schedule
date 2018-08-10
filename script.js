@@ -79,6 +79,6 @@ var app = new Vue({
 		}
 	},
 	mounted: function() {
-		$.getJSON( "https://coscup.org/2017-assets/json/submissions.json", this.fetchData);
+		$.getJSON( "https://coscup.org/2018-assets/json/submissions.json", this.fetchData);
 	}
 });
