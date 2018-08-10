@@ -2,27 +2,48 @@
 	margin: 0 .5em;
 }
 
-.timeline :first-child {
-	width: 8em;
+.timeline {
+	width: calc(100% - 8em);
+	overflow-x: scroll;
+	margin-left: 8em;
+	overflow-y: visible;
+	cursor: move;
+	cursor: grab;
 }
 
-.timeline * {
+.timeline table .headcol {
+	position: absolute;
+	width: 8em;
+	left: 0;
+	top: auto;
+	border-top-width: 1px;
+	/*only relevant for first row*/
+	margin-top: -1px;
+	/*compensate for top border*/
+}
+
+.timeline table * {
 	text-align: center;
 	vertical-align: middle;
 	margin: auto;
+}
+
+.timeline table thead th,
+.timeline table tbody td {
+	min-width: 5em;
 }
 
 .room-events {
 	position: relative;
 }
 
-.timeline tbody td,
-.timeline tbody th {
+.timeline table tbody td,
+.timeline table tbody th {
 	position: relative;
 	top: 1em;
 }
 
-.timeline tbody th .time {
+.timeline table tbody th .time {
 	margin-bottom: 280px;
 	transform: translate(0, -50%);
 }

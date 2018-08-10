@@ -12,8 +12,32 @@ var app = new Vue({
 		days: [],
 		schedule: {},
 		rooms: [],
-		times: [],
 		selected: 0
+	},
+	computed: {
+		styleForContainer: function () {
+			if (this.days.length) {
+				var day = this.days[this.selected];
+				var start = this.schedule[day]['start'].getHours();
+				var end   = this.schedule[day]['end'].getHours();
+				console.log(start, end);
+				return 'height:'+(300*(end - start + 1))+'px';
+			} else {
+				return '';
+			}
+		},
+		times: function () {
+			if (this.days.length) {
+				var day = this.days[this.selected];
+				var times = [];
+				for (var hour=this.schedule[day]['start'].getHours(); hour <= this.schedule[day]['end'].getHours(); hour++) {
+					times.push(((hour<9)?'0':'')+hour+':00');
+				}
+				return times;
+			} else {
+				return [];
+			}
+		}
 	},
 	methods: {
 		fetchData: function(data) {
@@ -48,7 +72,6 @@ var app = new Vue({
 				}
 				this.schedule[day]['events'][event['room']].push(event);
 			}
-			this.plotTime()
 			$('.loading').hide();
 		},
 		generateStyle: function(event) {
@@ -59,23 +82,11 @@ var app = new Vue({
 				'height:'+(300/60*event['minutes'])+'px;'+
 				'min-height:'+(300/60*event['minutes'])+'px';
 		},
-		plotTime: function() {
-			var day = this.days[this.selected];
-			this.times = [];
-			for (var hour=this.schedule[day]['start'].getHours(); hour <= this.schedule[day]['end'].getHours(); hour++) {
-				this.times.push(((hour<9)?'0':'')+hour+':00')
-			}
-		},
 		launch: function(event) {
 			$('#eventDetail .title').text(event['subject'])
 			$('#eventDetail .speaker').text(event['speaker']['name'])
 			$('#eventDetail .modal-body').text(event['summary'])
 			$('#eventDetail .time').text(event['start'].getTimeString()+' - '+event['end'].getTimeString())
-		}
-	},
-	watch: {
-		selected: function() {
-			this.plotTime()
 		}
 	},
 	mounted: function() {

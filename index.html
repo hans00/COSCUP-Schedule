@@ -50,45 +50,48 @@
 					<div class="days">
 						<a href=# class='btn btn-default btn-lg' v-for="day of days" v-bind:class="{ active: (days[selected] == day) }" @click="selected = days.indexOf(day)">{{day}}</a>
 					</div>
-					<table class="table timeline">
-						<thead>
-							<tr>
-								<th>Time \ Room</th>
-								<th v-for="room of rooms">{{room}}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th rel="time">
-									<div class="time" v-for="time of times">{{time}}</div>
-								</th>
-								<td class="room-events"
-									v-for="room of rooms"
-									v-bind:rel="room">
-									<div class="event btn btn-info btn-striped"
-										v-for="event of schedule[days[selected]]['events'][room]"
-										v-bind:style="generateStyle(event)"
-										@click="launch(event)"
-										data-toggle="modal" data-target="#eventDetail">
-										<span class="time">
-											{{event['start'].getTimeString()}} - {{event['end'].getTimeString()}}
-										</span>
-										<span>
-											{{event['subject']}}
-										</span>
-										<span>
-											{{event['speaker']['name']}}
-										</span>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<div class="timeline dragscroll" v-bind:style="styleForContainer">
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="headcol">Time \ Room</th>
+									<th v-for="room of rooms">{{room}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th class="headcol" rel="time">
+										<div class="time" v-for="time of times">{{time}}</div>
+									</th>
+									<td class="room-events"
+										v-for="room of rooms"
+										v-bind:rel="room">
+										<div class="event btn btn-info btn-striped"
+											v-for="event of schedule[days[selected]]['events'][room]"
+											v-bind:style="generateStyle(event)"
+											@click="launch(event)"
+											data-toggle="modal" data-target="#eventDetail">
+											<span class="time">
+												{{event['start'].getTimeString()}} - {{event['end'].getTimeString()}}
+											</span>
+											<span>
+												{{event['subject']}}
+											</span>
+											<span>
+												{{event['speaker']['name']}}
+											</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dragscroll/0.0.8/dragscroll.min.js" integrity="sha256-Y1FoPjA9P8r32Xxe8bgnq+YS2CNo2kH3YCiAMTvwofo=" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/vue/2.3.2/vue.min.js"></script>
 		<script src="script.js"></script>
 	</body>
